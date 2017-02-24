@@ -1,0 +1,52 @@
+body{
+  background-color: rgba(217, 176, 55, 0.07)
+}
+
+nav{
+ position: fixed;
+}
+
+.logo{
+  text-align: center;
+  padding: 6px;
+}
+
+.prof-pic{
+  width: 40%;
+  height: 40%;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+.jumbotron{
+  background-image: url("https://phlow.github.io/feeling-responsive/images/unsplash_brooklyn-bridge_header.jpg");
+  background-size: 50% 50%;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: .7;
+  position:sticky;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  display: flex;
+  align-items: center;
+}
+
+.btn-main{
+  background-color: #ff5c00;
+  color: white;
+  width:100px;
+  border: 2px solid #ff5c00;
+  border-radius: 8px;
+  padding: 13px;
+}
+
+.btn-main:hover,
+.btn-main:active,
+.btn-main:target{
+  background-color: #f1883a;
+  color: white;
+}

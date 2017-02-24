@@ -6,7 +6,7 @@ module.exports = {
 
   // GET all users
   getAllUser : (req, res) => {
-    user.find( {}, {__v : false, password: false}, (err, data) =>{
+    user.find( {}, {__v : false}, (err, data) =>{
       res.send(data)
     })
   },
@@ -25,7 +25,7 @@ module.exports = {
         newUser.save((err,create) =>{
           res.json({
             username : create.username,
-            password : 'XXXXX'
+            password : create.password
           })
         })
       }
@@ -38,19 +38,19 @@ module.exports = {
     .then( (login) => {
       if(!login){
         // console.log(login);
-        res.json({err: "User not found!"})
+        res.json({err: "Invalid username or password match!"})
       }
       else if( hash.verify(req.body.password,login.password) ){
         // console.log(login);
         let token = jwt.sign( {username: login.username}, process.env.SECRET, {expiresIn : 600*600});
         res.json( {
           username : login.username,
-          password : 'XXXXX',
+          password : login.password,
           token    : token
         } );
       }
       else
-          res.json({err: 'invalid username or password!'})
+          res.json({err: 'Invalid username or password match!'})
     })
   },
 
@@ -63,10 +63,7 @@ module.exports = {
       }, { new : true }, (err, data) => {
     res.json({
       message : "User (below) has been updated",
-      data : {
-        username : data.username,
-        password : 'XXXXX'
-      }})
+      data : data})
     })
   },
 
@@ -74,7 +71,8 @@ module.exports = {
   deleteUser : (req, res) => {
     user.findOneAndRemove( {_id: req.params.id} ).then( (data) =>{
       res.json({
-        message : `User ${data.username} has been removed`})
+        message : "User (below) has been removed",
+        data : data})
     })
   },
 
